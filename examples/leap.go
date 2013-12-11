@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/hybridgroup/gobot"
-	"github.com/hybridgroup/gobot-leap"
+	"github.com/hybridgroup/gobot-leapmotion"
 )
 
 func main() {
