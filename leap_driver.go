@@ -1,8 +1,8 @@
 package gobotLeap
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 	"github.com/hybridgroup/gobot"
 )
 
@@ -24,23 +24,23 @@ func (me *LeapDriver) StartDriver() {
 	me.Events["Message"] = make(chan interface{})
 	enableGestures := map[string]bool{"enableGestures": true}
 	b, _ := json.Marshal(enableGestures)
-	_, err := me.LeapAdaptor.Leap.Write(b) 
+	_, err := me.LeapAdaptor.Leap.Write(b)
 	if err != nil {
 		panic(err)
 	}
 
 	go func() {
 		for {
-		select {
-		default:
-			var msg = make([]byte, 1024)
-			_, err := me.LeapAdaptor.Leap.Read(msg)
-			if err != nil {
-				fmt.Println("err", err)
-			} else {
-				me.Events["Message"] <- string(msg)
+			select {
+			default:
+				var msg = make([]byte, 1024)
+				_, err := me.LeapAdaptor.Leap.Read(msg)
+				if err != nil {
+					fmt.Println("err", err)
+				} else {
+					me.Events["Message"] <- string(msg)
+				}
 			}
 		}
-	}
 	}()
 }

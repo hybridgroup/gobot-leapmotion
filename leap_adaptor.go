@@ -1,8 +1,8 @@
 package gobotLeap
 
 import (
-	"fmt"
 	"code.google.com/p/go.net/websocket"
+	"fmt"
 	"github.com/hybridgroup/gobot"
 )
 
