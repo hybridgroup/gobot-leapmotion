@@ -1,6 +1,7 @@
 package gobotLeap
 
 import (
+	"code.google.com/p/go.net/websocket"
 	"encoding/json"
 	"fmt"
 	"github.com/hybridgroup/gobot"
@@ -33,13 +34,11 @@ func (me *LeapDriver) StartDriver() {
 		for {
 			select {
 			default:
-				var msg = make([]byte, 1024)
-				_, err := me.LeapAdaptor.Leap.Read(msg)
-				if err != nil {
-					fmt.Println("err", err)
-				} else {
-					me.Events["Message"] <- string(msg)
-				}
+				var msg []byte
+				var data map[string]interface{}
+				websocket.Message.Receive(me.LeapAdaptor.Leap, &msg)
+				json.Unmarshal(msg, &data)
+				me.Events["Message"] <- data
 			}
 		}
 	}()
