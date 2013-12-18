@@ -21,8 +21,8 @@ func main() {
 	}
 
 	robot := gobot.Robot{
-		Connections: []interface{}{leapAdaptor},
-		Devices:     []interface{}{leap},
+		Connections: []gobot.Connection{leapAdaptor},
+		Devices:     []gobot.Device{leap},
 		Work:        work,
 	}
 

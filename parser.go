@@ -53,16 +53,16 @@ type LeapInteractionBox struct {
 }
 
 type LeapFrame struct {
-	CurrentFrameRate float64              `json:"currentFrameRate"`
-	Gestures         []LeapGesture        `json:"gestures"`
-	Hands            []LeapHand           `json:"hands"`
-	ID               int                  `json:"id"`
-	InteractionBox   LeapInteractionBox   `json:"interactionBox"`
-	Pointables       []LeapPointable      `json:"pointables"`
-	R                [][]float64          `json:"r"`
-	S                float64              `json:"s"`
-	T                []float64            `json:"t"`
-	Timestamp        int                  `json:"timestamp"`
+	CurrentFrameRate float64            `json:"currentFrameRate"`
+	Gestures         []LeapGesture      `json:"gestures"`
+	Hands            []LeapHand         `json:"hands"`
+	ID               int                `json:"id"`
+	InteractionBox   LeapInteractionBox `json:"interactionBox"`
+	Pointables       []LeapPointable    `json:"pointables"`
+	R                [][]float64        `json:"r"`
+	S                float64            `json:"s"`
+	T                []float64          `json:"t"`
+	Timestamp        int                `json:"timestamp"`
 }
 
 func (l *LeapDriver) ParseLeapFrame(data []byte) LeapFrame {

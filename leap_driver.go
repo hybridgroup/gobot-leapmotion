@@ -3,7 +3,6 @@ package gobotLeap
 import (
 	"code.google.com/p/go.net/websocket"
 	"encoding/json"
-	"fmt"
 	"github.com/hybridgroup/gobot"
 )
 
@@ -20,8 +19,7 @@ func NewLeap(adaptor *LeapAdaptor) *LeapDriver {
 	return d
 }
 
-func (me *LeapDriver) StartDriver() {
-	fmt.Println("socket", me.LeapAdaptor.Leap)
+func (me *LeapDriver) Start() bool {
 	me.Events["Message"] = make(chan interface{})
 	enableGestures := map[string]bool{"enableGestures": true}
 	b, _ := json.Marshal(enableGestures)
@@ -40,4 +38,6 @@ func (me *LeapDriver) StartDriver() {
 			}
 		}
 	}()
+
+	return true
 }
