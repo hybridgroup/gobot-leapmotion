@@ -15,11 +15,9 @@ func main() {
 	leap.Name = "leap"
 
 	work := func() {
-		go func() {
-			for {
-				printHands(gobot.On(leap.Events["Message"]).(gobotLeap.LeapFrame))
-			}
-		}()
+		gobot.On(leap.Events["Message"], func(data interface{}) {
+			printHands(data.(gobotLeap.LeapFrame))
+		})
 	}
 
 	robot := gobot.Robot{
