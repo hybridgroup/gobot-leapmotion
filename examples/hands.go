@@ -17,7 +17,7 @@ func main() {
 	work := func() {
 		go func() {
 			for {
-				fmt.Println(gobot.On(leap.Events["Message"]).(gobotLeap.LeapFrame))
+				printHands(gobot.On(leap.Events["Message"]).(gobotLeap.LeapFrame))
 			}
 		}()
 	}
@@ -29,4 +29,10 @@ func main() {
 	}
 
 	robot.Start()
+}
+
+func printHands(frame gobotLeap.LeapFrame) {
+	for key, hand := range frame.Hands {
+		fmt.Println("Hand", key, hand)
+	}
 }

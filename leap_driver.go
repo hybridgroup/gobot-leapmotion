@@ -35,10 +35,8 @@ func (me *LeapDriver) StartDriver() {
 			select {
 			default:
 				var msg []byte
-				var data map[string]interface{}
 				websocket.Message.Receive(me.LeapAdaptor.Leap, &msg)
-				json.Unmarshal(msg, &data)
-				me.Events["Message"] <- data
+				me.Events["Message"] <- me.ParseLeapFrame(msg)
 			}
 		}
 	}()

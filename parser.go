@@ -6,73 +6,75 @@ import (
 )
 
 type LeapGesture struct {
-	Direction     []float64
-	Duration      int
-	HandIDs       []int
-	ID            int
-	PointableIDs  []int
-	Position      []float64
-	Speed         float64
-	StartPosition []float64
-	State         string
-	Type          string
+	Direction     []float64       `json:"direction"`
+	Duration      int             `json:"duration"`
+	Hands         []LeapHand      `json:"hands"`
+	ID            int             `json:"id"`
+	Pointables    []LeapPointable `json:"pointables"`
+	Position      []float64       `json:"position"`
+	Speed         float64         `json:"speed"`
+	StartPosition []float64       `json:"StartPosition"`
+	State         string          `json:"state"`
+	Type          string          `json:"type"`
 }
 
 type LeapHand struct {
-	Direction              []float64
-	ID                     int
-	PalmNormal             []float64
-	PalmPosition           []float64
-	PalmVelocity           []float64
-	R                      [][]float64
-	S                      float64
-	SphereCenter           []float64
-	SphereRadius           float64
-	StabilizedPalmPosition []float64
-	T                      []float64
-	TimeVisible            float64
+	Direction              []float64   `json:"direction"`
+	ID                     int         `json:"id"`
+	PalmNormal             []float64   `json:"palmNormal"`
+	PalmPosition           []float64   `json:"PalmPosition"`
+	PalmVelocity           []float64   `json:"PalmVelocity"`
+	R                      [][]float64 `json:"r"`
+	S                      float64     `json:"s"`
+	SphereCenter           []float64   `json:"sphereCenter"`
+	SphereRadius           float64     `json:"sphereRadius"`
+	StabilizedPalmPosition []float64   `json:"stabilizedPalmPosition"`
+	T                      []float64   `json:"t"`
+	TimeVisible            float64     `json:"TimeVisible"`
 }
 
 type LeapPointable struct {
-	Direction             []float64
-	HandID                int
-	ID                    int
-	Length                float64
-	StabilizedTipPosition []float64
-	TimeVisible           float64
-	TipPosition           []float64
-	TipVelocity           []float64
-	Tool                  bool
-	TouchDistance         float64
-	TouchZone             string
+	Direction             []float64 `json:"direction"`
+	HandID                int       `json:"handId"`
+	ID                    int       `json:"id"`
+	Length                float64   `json:"length"`
+	StabilizedTipPosition []float64 `json:"stabilizedTipPosition"`
+	TimeVisible           float64   `json:"timeVisible"`
+	TipPosition           []float64 `json:"tipPosition"`
+	TipVelocity           []float64 `json:"tipVelocity"`
+	Tool                  bool      `json:"tool"`
+	TouchDistance         float64   `json:"touchDistance"`
+	TouchZone             string    `json:"touchZone"`
+}
+
+type LeapInteractionBox struct {
+	Center []int     `json:"center"`
+	Size   []float64 `json:"size"`
 }
 
 type LeapFrame struct {
-	CurrentFrameRate float64
-	Gestures         []LeapGesture
-	Hands            []LeapHand
-	ID               int
-	InteractionBox   struct {
-		Center []int
-		Size   []float64
-	}
-	Pointables []LeapPointable
-	R          [][]float64
-	S          float64
-	T          []float64
-	Timestamp  int
+	CurrentFrameRate float64              `json:"currentFrameRate"`
+	Gestures         []LeapGesture        `json:"gestures"`
+	Hands            []LeapHand           `json:"hands"`
+	ID               int                  `json:"id"`
+	InteractionBox   []LeapInteractionBox `json:"interactionBox"`
+	Pointables       []LeapPointable      `json:"pointables"`
+	R                [][]float64          `json:"r"`
+	S                float64              `json:"s"`
+	T                []float64            `json:"t"`
+	Timestamp        int                  `json:"timestamp"`
 }
 
-func ParseLeapFrame(data []byte) LeapFrame {
-	if !isAFrame(data) {
-		return LeapFrame{}
-	}
+func (l *LeapDriver) ParseLeapFrame(data []byte) LeapFrame {
+	//if !l.isAFrame(data) {
+	//	return LeapFrame{}
+	//}
 	var frame LeapFrame
 	json.Unmarshal(data, &frame)
 	return frame
 }
 
-func isAFrame(data []byte) bool {
+func (l *LeapDriver) isAFrame(data []byte) bool {
 	match, _ := regexp.Match("currentFrameRate", data)
 	return match
 }
