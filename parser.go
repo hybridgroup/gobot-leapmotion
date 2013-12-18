@@ -57,7 +57,7 @@ type LeapFrame struct {
 	Gestures         []LeapGesture        `json:"gestures"`
 	Hands            []LeapHand           `json:"hands"`
 	ID               int                  `json:"id"`
-	InteractionBox   []LeapInteractionBox `json:"interactionBox"`
+	InteractionBox   LeapInteractionBox   `json:"interactionBox"`
 	Pointables       []LeapPointable      `json:"pointables"`
 	R                [][]float64          `json:"r"`
 	S                float64              `json:"s"`
