@@ -34,7 +34,7 @@ func (me *LeapDriver) Start() bool {
 			default:
 				var msg []byte
 				websocket.Message.Receive(me.LeapAdaptor.Leap, &msg)
-				me.Events["Message"] <- me.ParseLeapFrame(msg)
+				gobot.Publish(me.Events["Message"], me.ParseLeapFrame(msg))
 			}
 		}
 	}()
