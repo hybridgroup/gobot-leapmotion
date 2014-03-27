@@ -65,10 +65,17 @@ type LeapFrame struct {
 	Timestamp        int                `json:"timestamp"`
 }
 
+func (this *LeapHand) X() float64 {
+	return this.PalmPosition[0]
+}
+func (this *LeapHand) Y() float64 {
+	return this.PalmPosition[1]
+}
+func (this *LeapHand) Z() float64 {
+	return this.PalmPosition[2]
+}
+
 func (l *LeapDriver) ParseLeapFrame(data []byte) LeapFrame {
-	//if !l.isAFrame(data) {
-	//	return LeapFrame{}
-	//}
 	var frame LeapFrame
 	json.Unmarshal(data, &frame)
 	return frame
