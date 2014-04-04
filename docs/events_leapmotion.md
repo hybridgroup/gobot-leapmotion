@@ -6,8 +6,8 @@ Gets triggered when doing a hand motion, makes hand input available.
 
 Leap Hand contains:
 
- * position (palm x-y-z coords)
- * wrist rotation (axis,angle,matrix)
+- **position** (palm x-y-z coords)
+- **wrist rotation** (axis,angle,matrix)
 
 ##### Example JSON
 
@@ -79,10 +79,10 @@ Gets triggered when doing a gesture motion, makes hand input available.
 
 There is 4 Gesture types :
 
- * Circle - A circular movement by a finger.
- * Swipe - A straight line movement by the hand with fingers extended.
- * KeyTap -  A downward tapping movement by a finger.
- * ScreenTap - A forward tapping movement by a finger.
+- **Circle** - A circular movement by a finger.
+- **Swipe** - A straight line movement by the hand with fingers extended.
+- **KeyTap** -  A downward tapping movement by a finger.
+- **ScreenTap** - A forward tapping movement by a finger.
 
 ##### Example JSON
 
@@ -123,8 +123,8 @@ Gets triggered when doing a pointable motion, makes hand input available.
 
 Leap Pointable contains:
 
- * length 
- * touch zone 
+- **length** 
+- **touch zone** 
 
 ##### Example JSON
 
@@ -162,10 +162,6 @@ Leap Pointable contains:
 ## frame
 
 Gets triggered with every motion detected, makes frame input available.
-
-## start
-
-Sent when the device has been started and is ready to use.
 
 ## Message
 
