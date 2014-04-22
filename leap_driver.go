@@ -41,3 +41,5 @@ func (me *LeapDriver) Start() bool {
 
 	return true
 }
+func (me *LeapDriver) Init() bool { return true }
+func (me *LeapDriver) Halt() bool { return true }
